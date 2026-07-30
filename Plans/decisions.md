@@ -1,0 +1,23 @@
+# Decisions
+
+Dated record of architecture/design choices and the reasoning behind them.
+
+## 2026-07-29 — Abstract classes ahead of the course
+Tower and Enemy will be abstract base classes even though part06 (abstract classes)
+hasn't been covered yet in MOOC.fi. Concepts explained as needed, at a slower,
+visual pace.
+
+## 2026-07-29 — Frontend/backend bridge: JavaFX WebView
+Backend stays pure vanilla Java (no framework). Frontend is HTML/CSS/JS, vibe-coded,
+embedded in the Java app via JavaFX's WebView component. Java pushes game state to
+the JS side each tick via WebEngine.executeScript(...). No server, no networking layer.
+
+## 2026-07-29 — Folder scheme vs. Maven convention
+Maven requires real source under src/main/java/com/ironhold/... — that stays as-is.
+Plans/, Backend/, Frontend/, UI/, Characters/ are organizational folders (docs,
+notes, mockups, asset planning) layered on top, not alternate source roots.
+
+## 2026-07-29 — Art strategy
+No 3D models needed (2D game). Start with free/CC0 tower-defense sprite packs
+(e.g. Kenney.nl) as placeholders so art never blocks a programming milestone.
+Swap in nicer art during the polish pass (milestone 4).
