@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Pipelines: Farm Data Project and L.R. TactiCam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&family=Source+Serif+4:wght@400;600&family=Space+Mono:wght@400;700&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#e9e3d3;}
+
+  /* ============================================================
+     TOP MATTER
+  ============================================================ */
+  .masthead{
+    padding:56px 24px 40px;
+    text-align:center;
+    background:#e9e3d3;
+    font-family:'Source Serif 4', serif;
+  }
+  .masthead h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(28px,4vw,42px);
+    margin:0 0 10px;
+    color:#2b2416;
+  }
+  .masthead p{
+    color:#6b6250;
+    font-size:15px;
+    margin:0;
+    letter-spacing:0.02em;
+  }
+
+  /* ============================================================
+     SHARED CONNECTOR
+  ============================================================ */
+  .connector{
+    text-align:center;
+    padding:22px 24px;
+    background:#e9e3d3;
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    color:#8a7f68;
+  }
+  .connector .arrow{
+    display:block;
+    font-size:22px;
+    color:#b3603a;
+    margin-bottom:6px;
+  }
+
+  /* ============================================================
+     PLAN A: FARM (field journal theme)
+     palette: parchment, ink brown, harvest gold, sage, rust clay
+  ============================================================ */
+  .farm{
+    --paper:#f4eedd;
+    --paper2:#ece3cd;
+    --ink:#3a2f22;
+    --ink-soft:#6b5d47;
+    --gold:#b8862f;
+    --sage:#6f7f52;
+    --rust:#a34e29;
+    --line:#cdbf9c;
+    background:var(--paper);
+    padding:60px 24px 76px;
+    font-family:'Source Serif 4', serif;
+    color:var(--ink);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .farm .inner{max-width:1080px;margin:0 auto;}
+
+  .farm-header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:14px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .farm-eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rust);
+  }
+  .farm-header h2{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:30px;
+    margin:2px 0 0;
+    color:var(--ink);
+  }
+  .farm-dateline{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  .farm-lede{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:760px;
+    margin:14px 0 36px;
+    line-height:1.6;
+  }
+
+  .field-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+    margin-bottom:6px;
+  }
+  .entry{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:22px 20px 24px;
+    background:var(--paper);
+    position:relative;
+  }
+  .entry:nth-child(even){background:var(--paper2);}
+  .entry .glyph{
+    width:30px;height:30px;
+    margin-bottom:12px;
+    color:var(--sage);
+  }
+  .entry .stage-label{
+    font-family:'Space Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:6px;
+  }
+  .entry h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  .entry ul{
+    margin:0;
+    padding-left:16px;
+    font-size:13.3px;
+    line-height:1.62;
+    color:var(--ink-soft);
+  }
+  .entry li{margin-bottom:3px;}
+  .entry.final{
+    background:var(--sage);
+    color:#f4f1e6;
+  }
+  .entry.final h3, .entry.final .stage-label{color:#f4f1e6;}
+  .entry.final ul{color:#e6e6d8;}
+  .entry.final .glyph{color:#e9d98f;}
+
+  .row-arrow-farm{
+    text-align:center;
+    color:var(--rust);
+    font-size:18px;
+    padding:14px 0;
+    font-family:'Space Mono', monospace;
+  }
+
+  .advisory{
+    margin-top:30px;
+    border:1.5px dashed var(--rust);
+    background:#f7ecd8;
+    border-radius:4px;
+    padding:22px 26px;
+  }
+  .advisory-title{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin-bottom:12px;
+  }
+  .advisory ol{
+    margin:0;
+    padding-left:20px;
+    font-size:13.8px;
+    line-height:1.85;
+    color:var(--ink);
+  }
+  .advisory ol b{color:var(--rust);}
+  .advisory .fine{
+    margin-top:12px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  .margin-note{
+    margin-top:24px;
+    padding:18px 22px;
+    background:transparent;
+    border-left:3px solid var(--sage);
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.65;
+    font-style:italic;
+  }
+  .margin-note b{
+    font-style:normal;
+    font-weight:600;
+    color:var(--ink);
+    display:block;
+    margin-bottom:4px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  /* ============================================================
+     PLAN B: TACTICAM (pitch and scoreboard theme)
+     palette: turf green, chalk, navy, broadcast orange
+  ============================================================ */
+  .tacticam{
+    --turf:#1e4d3a;
+    --turf-deep:#153a2b;
+    --turf-light:#2a6449;
+    --chalk:#f2f7f1;
+    --navy:#132a3a;
+    --sky:#4fa3d1;
+    --flare:#e8781f;
+    background:var(--turf-deep);
+    padding:60px 24px 80px;
+    font-family:'Inter', sans-serif;
+    color:var(--chalk);
+    position:relative;
+    overflow:hidden;
+  }
+  .tacticam::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 120px);
+    pointer-events:none;
+  }
+  .tacticam .inner{max-width:1080px;margin:0 auto;position:relative;}
+
+  .scoreboard{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:var(--navy);
+    border-radius:8px;
+    padding:16px 24px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+    gap:10px;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .scoreboard .tag{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--flare);
+  }
+  .scoreboard h2{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:30px;
+    letter-spacing:0.01em;
+    margin:2px 0 0;
+    color:var(--chalk);
+  }
+  .scoreboard .status{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--sky);
+    text-align:right;
+  }
+  .tactic-lede{
+    font-size:14.5px;
+    color:#c7d8cf;
+    max-width:760px;
+    margin:16px 0 34px;
+    line-height:1.6;
+  }
+
+  .lineup{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:10px;
+  }
+  .card{
+    background:var(--turf-light);
+    border-radius:10px;
+    padding:20px 18px 22px;
+    border:1px solid rgba(255,255,255,0.10);
+    position:relative;
+  }
+  .card .jersey{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:28px;height:28px;
+    border-radius:50%;
+    background:var(--navy);
+    color:var(--flare);
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    margin-bottom:12px;
+  }
+  .card h3{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:0.01em;
+    margin:0 0 10px;
+    color:var(--chalk);
+  }
+  .card ul{
+    margin:0;
+    padding-left:16px;
+    font-size:13px;
+    line-height:1.6;
+    color:#d7e4dd;
+  }
+  .card li{margin-bottom:3px;}
+  .card.final{
+    background:var(--flare);
+    border-color:transparent;
+  }
+  .card.final .jersey{background:var(--navy);color:#fff;}
+  .card.final h3{color:#1c1004;}
+  .card.final ul{color:#3a2308;}
+
+  .lane{
+    text-align:center;
+    padding:12px 0;
+    color:var(--sky);
+    font-family:'Space Mono', monospace;
+    font-size:16px;
+  }
+
+  .whiteboard{
+    margin-top:28px;
+    background:var(--navy);
+    border-radius:10px;
+    padding:20px 24px;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .whiteboard-title{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--sky);
+    margin-bottom:10px;
+  }
+  .whiteboard p{
+    margin:0;
+    font-size:13.6px;
+    line-height:1.7;
+    color:#dde8e2;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width:880px){
+    .field-grid{grid-template-columns:1fr 1fr;}
+    .lineup{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .field-grid{grid-template-columns:1fr;}
+    .lineup{grid-template-columns:1fr;}
+    .farm-dateline{text-align:left;}
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 24px 50px;
+    background:#e9e3d3;
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:#8a7f68;
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1>Two Paths, One Portfolio</h1>
+  <p>Primary: Farm Agricultural Data Project. Backup: L.R. TactiCam. Trip window August 5 through 28.</p>
+</div>
+
+<!-- ============================================================ -->
+<!-- PLAN A: FARM                                                  -->
+<!-- ============================================================ -->
+<section class="farm">
+  <div class="inner">
+
+    <div class="farm-header">
+      <div>
+        <div class="farm-eyebrow">Plan A. Primary route</div>
+        <h2>Field Notes: The Farm Data Project</h2>
+      </div>
+      <div class="farm-dateline">Est. window: 1.5&ndash;2 weeks on site<br>within Aug 5&ndash;28</div>
+    </div>
+    <p class="farm-lede">A passion project rooted in family legacy, carrying a real impact layer alongside it. Built to flex around however much time actually ends up spent on the farm.</p>
+
+    <div class="field-grid">
+      <div class="entry">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C9 6 6 9 6 13a6 6 0 0012 0c0-4-3-7-6-11z"/></svg>
+        <div class="stage-label">Before arrival</div>
+        <h3>Scope and Brainstorm</h3>
+        <ul>
+          <li>Ask what questions matter to the family and the farm itself</li>
+          <li>Weigh candidate themes: soil, crop health, livestock, irrigation, yield</li>
+          <li>Narrow to one or two focal themes ahead of time</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="12" cy="13.5" r="3.5"/><path d="M9 7l1.5-2.5h3L15 7"/></svg>
+        <div class="stage-label">On site</div>
+        <h3>Collection</h3>
+        <ul>
+          <li>Photos and video, phone or drone if available</li>
+          <li>Sensor logs or manual field notes</li>
+          <li>GPS-tagged field walks</li>
+          <li>Short interviews with family</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"/><path d="M4 9h16M9 9v10"/></svg>
+        <div class="stage-label">After collection</div>
+        <h3>Structure and Clean</h3>
+        <ul>
+          <li>Organize by field and by date</li>
+          <li>Label imagery: crop type, health, pests</li>
+          <li>Build a light schema, CSV or JSON</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9m6 10V4m6 15v-7"/></svg>
+        <div class="stage-label">Back in the city</div>
+        <h3>Analysis and Model</h3>
+        <ul>
+          <li>Trend charts across time</li>
+          <li>Basic crop or health classification if imagery is rich enough</li>
+          <li>Otherwise, solid descriptive statistics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row-arrow-farm">&darr;</div>
+
+    <div class="field-grid" style="grid-template-columns:1fr 1fr;max-width:640px;margin:0 auto;">
+      <div class="entry">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h14v16l-7-4-7 4z"/></svg>
+        <div class="stage-label">Framing</div>
+        <h3>Narrative Layer</h3>
+        <ul>
+          <li>Family legacy framing throughout</li>
+          <li>Before and after, season over season</li>
+          <li>Impact angle: sustainability, small-farm resilience</li>
+        </ul>
+      </div>
+      <div class="entry final">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+        <div class="stage-label">Outcome</div>
+        <h3>Portfolio Deliverable</h3>
+        <ul>
+          <li>Interactive dashboard or story-driven web app</li>
+          <li>Visual reports: maps, charts, photo timelines</li>
+          <li>Short write-up on process and why it matters</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="advisory">
+      <div class="advisory-title">Weather advisory: feasibility checkpoints</div>
+      <ol>
+        <li><b>1.5 weeks or more, rich data:</b> run the full pipeline, imagery and classification included</li>
+        <li><b>Short window, sparse data:</b> scale down to the narrative and descriptive version, still Plan A, just lighter</li>
+        <li><b>Collection falls through entirely:</b> access, weather, or timing blocks it, pivot fully to Plan B</li>
+      </ol>
+      <div class="fine">Reassessed live once actual farm dates are locked in, before Aug 28. Either version keeps the personal and impact framing, not just a technical exercise.</div>
+    </div>
+
+    <div class="margin-note">
+      <b>Margin note. Open thread</b>
+      Which single theme makes the strongest personal story? One told well beats several told thinly. Worth checking what family records or past yield data already exist before arriving, so the on-site window goes toward what is genuinely missing.
+    </div>
+
+  </div>
+</section>
+
+<div class="connector">
+  <span class="arrow">&darr;</span>
+  fallback route, if on-farm collection proves infeasible
+</div>
+
+<!-- ============================================================ -->
+<!-- PLAN B: TACTICAM                                              -->
+<!-- ============================================================ -->
+<section class="tacticam">
+  <div class="inner">
+
+    <div class="scoreboard">
+      <div>
+        <div class="tag">Plan B. Backup route</div>
+        <h2>L.R. TactiCam</h2>
+      </div>
+      <div class="status">Sports CV / sequel to the World Cup app</div>
+    </div>
+    <p class="tactic-lede">Tracks soccer players and the field itself to generate tactical overlays. A direct follow-up to the World Cup app, built to activate quickly if the farm plan cannot run.</p>
+
+    <div class="lineup">
+      <div class="card">
+        <div class="jersey">1</div>
+        <h3>Concept and Scope</h3>
+        <ul>
+          <li>Which tactical questions: formations, pressing, spacing, heatmaps</li>
+          <li>Reuse the World Cup app's visual language and branding</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="jersey">2</div>
+        <h3>Source Footage</h3>
+        <ul>
+          <li>Broadcast clips or public match footage</li>
+          <li>Fixed tactical-cam angle, ideal for homography</li>
+          <li>Start with a handful of sample clips</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="jersey">3</div>
+        <h3>Detect and Track</h3>
+        <ul>
+          <li>Player and ball detection with a pretrained CV model</li>
+          <li>Multi-object tracking with persistent IDs</li>
+          <li>Team classification by jersey color</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="jersey">4</div>
+        <h3>Field Registration</h3>
+        <ul>
+          <li>Detect pitch lines and corners</li>
+          <li>Homography, warp to a top-down tactical view</li>
+          <li>Map player coordinates onto a standard pitch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lane">&darr;</div>
+
+    <div class="lineup" style="grid-template-columns:1fr 1fr;max-width:600px;margin:0 auto;">
+      <div class="card">
+        <div class="jersey">5</div>
+        <h3>Tactical Overlays</h3>
+        <ul>
+          <li>Formation shapes</li>
+          <li>Heatmaps and coverage zones</li>
+          <li>Pressing triggers, spacing lines</li>
+          <li>Speed and distance metrics</li>
+        </ul>
+      </div>
+      <div class="card final">
+        <div class="jersey">6</div>
+        <h3>Portfolio Deliverable</h3>
+        <ul>
+          <li>Interactive replay app, scrub through a match</li>
+          <li>Exportable tactical clips</li>
+          <li>Sequel framing tying it back to the World Cup app</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="whiteboard">
+      <div class="whiteboard-title">Locker room note. Open thread</div>
+      <p>As a sequel, the World Cup app's existing design system and reusable code, video ingestion, UI shell, could shortcut the build. Worth deciding early whether tactical overlays should be static images or a scrubbable video player, since that choice shapes the whole pipeline.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>Both plans share the same six-stage shape for portfolio consistency. Decision reassessed live during the Aug 5&ndash;28 trip.</footer>
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini Tower Defense: Architecture Split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#0f2818;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:32px 32px;
+    font-family:'Inter', sans-serif;
+    color:#eef7ee;
+    padding:52px 22px 72px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;}
+
+  h1{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:clamp(28px,4vw,42px);
+    text-align:center;
+    margin:0 0 10px;
+    color:#ffd35c;
+    text-shadow:0 2px 0 rgba(0,0,0,0.35);
+  }
+  .sub{
+    text-align:center;
+    color:#a9c9ab;
+    font-size:14.5px;
+    margin-bottom:8px;
+  }
+  .inspo{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:#7fae83;
+    margin-bottom:46px;
+  }
+  .inspo b{color:#ffd35c;}
+
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:34px;
+  }
+
+  .panel{
+    border-radius:16px;
+    padding:24px 24px 26px;
+    position:relative;
+  }
+  .panel.backend{
+    background:#173a24;
+    border:2px solid #2f6b45;
+  }
+  .panel.frontend{
+    background:#1c2a45;
+    border:2px solid #3d5c99;
+  }
+
+  .panel-tag{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .panel.backend .panel-tag{color:#7fd996;}
+  .panel.frontend .panel-tag{color:#8fb0f2;}
+
+  .panel h2{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:22px;
+    margin:0 0 6px;
+  }
+  .panel.backend h2{color:#d7f5dd;}
+  .panel.frontend h2{color:#dbe6fb;}
+
+  .panel .who{
+    font-size:12.5px;
+    color:#a9c9ab;
+    margin-bottom:16px;
+  }
+  .panel.frontend .who{color:#a9bce0;}
+
+  .class-box{
+    background:rgba(0,0,0,0.22);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:10px;
+  }
+  .class-box .name{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .panel.backend .name{color:#ffd35c;}
+  .panel.frontend .name{color:#ffb672;}
+  .class-box .desc{
+    font-size:12.5px;
+    color:#cfe6d1;
+    line-height:1.5;
+  }
+  .panel.frontend .class-box .desc{color:#cdd8f0;}
+  .class-box .rel{
+    font-size:11px;
+    color:#8fb897;
+    margin-top:4px;
+    font-style:italic;
+  }
+  .panel.frontend .class-box .rel{color:#8fa3d6;}
+
+  .flow{
+    text-align:center;
+    color:#ffd35c;
+    font-family:'Space Mono', monospace;
+    font-size:22px;
+    margin:6px 0 28px;
+  }
+
+  .moodboard{
+    background:#173a24;
+    border:2px dashed #ffd35c;
+    border-radius:16px;
+    padding:22px 26px;
+    margin-bottom:30px;
+  }
+  .moodboard-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:#ffd35c;
+    margin-bottom:14px;
+  }
+  .mood-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .mood-col h3{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:#a9c9ab;
+    margin:0 0 8px;
+  }
+  .mood-col ul{
+    margin:0;
+    padding-left:18px;
+    font-size:13px;
+    line-height:1.7;
+    color:#d7ecd9;
+  }
+
+  .milestones{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+  }
+  .ms{
+    background:#12331f;
+    border:1px solid #2f6b45;
+    border-radius:12px;
+    padding:16px 16px 18px;
+  }
+  .ms .n{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:24px;height:24px;
+    border-radius:50%;
+    background:#ffd35c;
+    color:#1a2e1c;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+    margin-bottom:10px;
+  }
+  .ms h4{
+    font-family:'Baloo 2', sans-serif;
+    font-size:15px;
+    margin:0 0 6px;
+    color:#eef7ee;
+  }
+  .ms p{
+    font-size:12px;
+    color:#a9c9ab;
+    line-height:1.55;
+    margin:0;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:36px;
+    font-size:12.5px;
+    color:#7fae83;
+    font-family:'Space Mono', monospace;
+  }
+
+  @media (max-width:820px){
+    .split{grid-template-columns:1fr;}
+    .mood-row{grid-template-columns:1fr;}
+    .milestones{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Mini Tower Defense</h1>
+  <div class="sub">Java backend you hardcode, vibe-coded frontend on top</div>
+  <div class="inspo">Reference points: <b>Bloons TD</b> for charm and juice, <b>Tower Defense Simulator</b> for clean strategic structure</div>
+
+  <div class="split">
+
+    <div class="panel backend">
+      <div class="panel-tag">You build this</div>
+      <h2>Backend / Game Engine</h2>
+      <div class="who">Mostly you, hardcoded, ask for help when stuck</div>
+
+      <div class="class-box">
+        <div class="name">Tower (abstract)</div>
+        <div class="desc">Range, damage, fire rate, targeting rule. Subclassed per tower type.</div>
+        <div class="rel">extended by &rarr; DartTower, CannonTower, SlowTower</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Enemy (abstract)</div>
+        <div class="desc">Health, speed, path position, reward on death. Subclassed per enemy type.</div>
+        <div class="rel">extended by &rarr; BasicEnemy, FastEnemy, TankEnemy</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Attackable / Targetable (interface)</div>
+        <div class="desc">Lets towers query and hit any enemy without caring which subclass it is.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Grid / Path</div>
+        <div class="desc">Holds the map layout, valid tower spots, and the enemy route.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Wave / WaveManager</div>
+        <div class="desc">Spawns enemies over time, escalates difficulty wave to wave.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">GameState</div>
+        <div class="desc">Currency, lives, current wave, win/loss condition.</div>
+        <div class="rel">ties everything above together each game tick</div>
+      </div>
+    </div>
+
+    <div class="panel frontend">
+      <div class="panel-tag">Vibe-coded</div>
+      <h2>Frontend / UI</h2>
+      <div class="who">Design-led, inspired by references, iterate freely</div>
+
+      <div class="class-box">
+        <div class="name">Game Board</div>
+        <div class="desc">Renders the grid, path, placed towers, and moving enemies each frame.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Tower Shop / HUD</div>
+        <div class="desc">Bottom or side bar to pick a tower, shows cost, currency, lives, wave count.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Placement Feedback</div>
+        <div class="desc">Range preview circle on hover, valid/invalid spot highlighting.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Feedback &amp; Juice</div>
+        <div class="desc">Hit flashes, death pop, currency pop-up text, wave-clear banner.</div>
+      </div>
+
+      <div class="class-box">
+        <div class="name">Start / Game Over Screens</div>
+        <div class="desc">Simple wrapper screens, low effort, high perceived polish.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="flow">&#8596;</div>
+
+  <div class="moodboard">
+    <div class="moodboard-title">Style direction, borrowing from both references</div>
+    <div class="mood-row">
+      <div class="mood-col">
+        <h3>From Bloons</h3>
+        <ul>
+          <li>Bright, saturated colors, high contrast against the path</li>
+          <li>Chunky, rounded fonts for HUD text</li>
+          <li>Playful pop feedback on hits and kills</li>
+          <li>Towers read instantly by silhouette, not just color</li>
+        </ul>
+      </div>
+      <div class="mood-col">
+        <h3>From Tower Defense Simulator</h3>
+        <ul>
+          <li>Clear grid logic, obvious valid placement spots</li>
+          <li>Clean top-down HUD: currency, lives, wave counter always visible</li>
+          <li>Readable range indicators when placing a tower</li>
+          <li>Escalating wave structure with a visible "next wave" cue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestones">
+    <div class="ms">
+      <div class="n">1</div>
+      <h4>Static Board</h4>
+      <p>Grid, path, one tower type that does nothing yet. Just prove placement works.</p>
+    </div>
+    <div class="ms">
+      <div class="n">2</div>
+      <h4>One Enemy, One Tower</h4>
+      <p>Enemy walks the path, tower detects and damages it. Core loop alive.</p>
+    </div>
+    <div class="ms">
+      <div class="n">3</div>
+      <h4>Waves &amp; Economy</h4>
+      <p>Multiple enemies, currency, multiple tower types, lives and loss condition.</p>
+    </div>
+    <div class="ms">
+      <div class="n">4</div>
+      <h4>Polish Pass</h4>
+      <p>Juice, HUD cleanup, balancing, maybe a second map.</p>
+    </div>
+  </div>
+
+  <footer>Backend classes stay stable once designed; frontend can keep iterating freely on top of them</footer>
+
+</div>
+</body>
+</html>

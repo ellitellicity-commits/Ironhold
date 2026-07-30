@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Pipelines — Farm Data Project & L.R. TactiCam</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#171a20;
+    --panel2:#1e222a;
+    --border:#2b303a;
+    --text:#eef0f3;
+    --muted:#9aa2af;
+    --green:#4ade80;
+    --blue:#60a5fa;
+    --amber:#f59e0b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:48px 24px 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;}
+  h1{font-size:30px;font-weight:800;text-align:center;margin:0 0 6px;}
+  .sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:44px;}
+
+  .plan{
+    background:var(--panel);
+    border-radius:18px;
+    padding:32px;
+    margin-bottom:36px;
+    border:1.5px solid var(--border);
+  }
+  .plan.a{border-color:rgba(74,222,128,0.45);}
+  .plan.b{border-color:rgba(96,165,250,0.45);}
+
+  .plan-title{font-size:22px;font-weight:800;margin:0 0 4px;}
+  .plan.a .plan-title{color:var(--green);}
+  .plan.b .plan-title{color:var(--blue);}
+  .plan-sub{color:var(--muted);font-size:14px;margin-bottom:26px;}
+
+  .stage-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:16px;
+    position:relative;
+  }
+  .stage-row.offset{
+    grid-template-columns:1fr 1fr;
+    max-width:640px;
+    margin:16px auto;
+  }
+  .stage{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px;
+    font-size:13px;
+    line-height:1.55;
+    position:relative;
+  }
+  .stage .num{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:22px;height:22px;
+    border-radius:50%;
+    font-size:11px;font-weight:800;
+    margin-right:8px;
+  }
+  .plan.a .stage .num{background:rgba(74,222,128,0.18);color:var(--green);}
+  .plan.b .stage .num{background:rgba(96,165,250,0.18);color:var(--blue);}
+  .stage.final{border-width:2px;}
+  .plan.a .stage.final{border-color:var(--green);}
+  .plan.b .stage.final{border-color:var(--blue);}
+  .stage-title{font-weight:700;font-size:14px;margin-bottom:8px;}
+  .stage ul{margin:0;padding-left:16px;color:var(--muted);}
+  .stage li{margin-bottom:2px;}
+
+  .arrow-down{
+    text-align:center;
+    color:var(--muted);
+    font-size:20px;
+    margin:2px 0 10px;
+  }
+
+  .gate{
+    margin-top:8px;
+    background:rgba(245,158,11,0.07);
+    border:1.5px dashed var(--amber);
+    border-radius:12px;
+    padding:18px 22px;
+  }
+  .gate-title{color:var(--amber);font-weight:800;font-size:14px;margin-bottom:10px;}
+  .gate ul{margin:0;padding-left:18px;color:#d9d2c2;font-size:13px;line-height:1.7;}
+  .gate li b{color:var(--text);}
+
+  .pivot{
+    text-align:center;
+    color:var(--amber);
+    font-size:13px;
+    font-style:italic;
+    margin:18px 0;
+  }
+  .pivot::before{content:"↓ ";}
+
+  .brainstorm{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:24px;
+  }
+  .bnote{
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 18px;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+  .bnote-title{color:var(--text);font-weight:700;font-size:13px;margin-bottom:6px;}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12.5px;
+    margin-top:12px;
+  }
+
+  @media (max-width:900px){
+    .stage-row{grid-template-columns:1fr 1fr;}
+    .stage-row.offset{grid-template-columns:1fr;}
+    .brainstorm{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Two Paths, One Portfolio</h1>
+  <div class="sub">Primary: Farm Agricultural Data Project &nbsp;·&nbsp; Backup: L.R. TactiCam (Sports CV) &nbsp;·&nbsp; Trip window: Aug 5–28</div>
+
+  <!-- ===================== PLAN A ===================== -->
+  <div class="plan a">
+    <div class="plan-title">PLAN A — Farm Agricultural Data Project <span style="color:var(--muted);font-weight:600;font-size:14px;">(Primary)</span></div>
+    <div class="plan-sub">A Passion Project rooted in family legacy, layered with real Impact — not a rigid corporate tool. Built around a flexible ~1.5–2 week on-site window.</div>
+
+    <div class="stage-row">
+      <div class="stage">
+        <div class="stage-title"><span class="num">1</span>Scope &amp; Brainstorm</div>
+        <ul>
+          <li>What questions matter to the family / farm itself?</li>
+          <li>Candidate themes: soil, crop health, livestock, irrigation, yield</li>
+          <li>Narrow to 1–2 focal themes before arriving</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">2</span>On-Site Collection</div>
+        <ul>
+          <li>Photos / video (phone, drone if available)</li>
+          <li>Sensor logs or manual field notes</li>
+          <li>GPS-tagged field walks</li>
+          <li>Interviews with family members</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">3</span>Structure &amp; Clean</div>
+        <ul>
+          <li>Organize by field and date</li>
+          <li>Label imagery (crop type, health, pests)</li>
+          <li>Build a simple schema (CSV / JSON)</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">4</span>Analysis / Model</div>
+        <ul>
+          <li>Trend charts over time</li>
+          <li>Basic CV crop/health classification, if imagery is rich enough</li>
+          <li>Otherwise: solid descriptive stats</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow-down">↓</div>
+
+    <div class="stage-row offset">
+      <div class="stage">
+        <div class="stage-title"><span class="num">5</span>Narrative Layer</div>
+        <ul>
+          <li>Family legacy framing</li>
+          <li>Before/after, season-over-season comparisons</li>
+          <li>Impact angle: sustainability, small-farm resilience</li>
+        </ul>
+      </div>
+      <div class="stage final">
+        <div class="stage-title"><span class="num">6</span>Portfolio Deliverable</div>
+        <ul>
+          <li>Interactive dashboard / story-driven web app</li>
+          <li>Visual reports: maps, charts, photo timelines</li>
+          <li>Write-up on process and why it matters</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gate">
+      <div class="gate-title">Feasibility Checkpoints (given flexible farm window)</div>
+      <ul>
+        <li><b>≥ ~1.5 weeks + rich data</b> → run full Plan A, including CV analysis</li>
+        <li><b>Short window / sparse data</b> → scale down to the narrative/descriptive version — still Plan A, lighter model</li>
+        <li><b>Collection falls through entirely</b> (access, weather, timing) → pivot fully to Plan B</li>
+      </ul>
+      <div style="margin-top:10px;color:var(--muted);font-size:12.5px;">Decision point: reassessed live once actual farm dates are locked in during the trip, before Aug 28. Either path keeps the "personal inspiration + impact" identity — not just a technical exercise.</div>
+    </div>
+  </div>
+
+  <div class="pivot">fallback if on-farm data collection proves infeasible</div>
+
+  <!-- ===================== PLAN B ===================== -->
+  <div class="plan b">
+    <div class="plan-title">PLAN B — L.R. TactiCam <span style="color:var(--muted);font-weight:600;font-size:14px;">(Backup / Sequel Concept)</span></div>
+    <div class="plan-sub">Sports Computer Vision · direct sequel to the World Cup app · tracks soccer players &amp; the field to generate tactical overlays.</div>
+
+    <div class="stage-row">
+      <div class="stage">
+        <div class="stage-title"><span class="num">1</span>Concept &amp; Scope</div>
+        <ul>
+          <li>Which tactical questions: formations, pressing, spacing, heatmaps?</li>
+          <li>Reuse the World Cup app's visual language and branding</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">2</span>Source Footage</div>
+        <ul>
+          <li>Broadcast clips / public match footage</li>
+          <li>Fixed tactical-cam angle ideal for homography</li>
+          <li>Start with a handful of sample clips</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">3</span>Detect &amp; Track</div>
+        <ul>
+          <li>Player/ball detection (pretrained CV model)</li>
+          <li>Multi-object tracking with persistent IDs</li>
+          <li>Team classification via jersey color</li>
+        </ul>
+      </div>
+      <div class="stage">
+        <div class="stage-title"><span class="num">4</span>Field Registration</div>
+        <ul>
+          <li>Detect pitch lines &amp; corners</li>
+          <li>Homography → warp to top-down tactical view</li>
+          <li>Map player coordinates onto a standardized pitch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow-down">↓</div>
+
+    <div class="stage-row offset">
+      <div class="stage">
+        <div class="stage-title"><span class="num">5</span>Tactical Overlays</div>
+        <ul>
+          <li>Formation shapes</li>
+          <li>Heatmaps &amp; coverage zones</li>
+          <li>Pressing triggers, spacing lines</li>
+          <li>Speed / distance metrics</li>
+        </ul>
+      </div>
+      <div class="stage final">
+        <div class="stage-title"><span class="num">6</span>Portfolio Deliverable</div>
+        <ul>
+          <li>Interactive replay app — scrub through a match</li>
+          <li>Exportable tactical clips</li>
+          <li>"Sequel" framing tying it back to the World Cup app</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="brainstorm">
+    <div class="bnote">
+      <div class="bnote-title">Farm project — open brainstorming threads</div>
+      Which single theme would make the strongest personal story — one told well beats several told thinly. Worth scouting what data already exists (old family records, past yields) before arriving, so the on-site window is spent capturing what's genuinely missing.
+    </div>
+    <div class="bnote">
+      <div class="bnote-title">TactiCam — open brainstorming threads</div>
+      Since this is a sequel, the World Cup app's existing design system and any reusable code (video ingestion, UI shell) could shortcut the build. Worth deciding early whether "tactical overlay" outputs should be static images or a scrubbable video player — that choice shapes the whole pipeline.
+    </div>
+  </div>
+
+  <footer>Both plans share the same 6-stage shape for portfolio consistency · Decision reassessed live during the Aug 5–28 trip</footer>
+</div>
+</body>
+</html>

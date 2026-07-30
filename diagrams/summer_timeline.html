@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summer Plan: July 28 to September 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#f6f4ee;
+    font-family:'Inter', sans-serif;
+    color:#26241f;
+    padding:56px 24px 80px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(26px,4vw,38px);
+    text-align:center;
+    margin:0 0 8px;
+  }
+  .sub{
+    text-align:center;
+    color:#7a7568;
+    font-size:14.5px;
+    margin-bottom:8px;
+  }
+  .split{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:#a8977a;
+    margin-bottom:52px;
+    letter-spacing:0.03em;
+  }
+
+  .track{
+    position:relative;
+    padding-left:38px;
+  }
+  .track::before{
+    content:"";
+    position:absolute;
+    left:11px;
+    top:8px;
+    bottom:8px;
+    width:2px;
+    background:linear-gradient(#c9a24a, #4f8a6d 50%, #4a6fa5);
+    border-radius:2px;
+  }
+
+  .phase{
+    position:relative;
+    margin-bottom:34px;
+  }
+  .phase::before{
+    content:"";
+    position:absolute;
+    left:-38px;
+    top:6px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:#f6f4ee;
+    border:3px solid var(--dot);
+  }
+  .phase.p1{--dot:#c9a24a;}
+  .phase.p2{--dot:#4f8a6d;}
+  .phase.p3{--dot:#4a6fa5;}
+
+  .card{
+    background:#fffdf8;
+    border:1px solid #e6e0cf;
+    border-radius:14px;
+    padding:24px 26px;
+  }
+  .phase.p2 .card{background:#f4f8f5;border-color:#d7e6dc;}
+  .phase.p3 .card{background:#f2f5fa;border-color:#d6e0ee;}
+
+  .dates{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--dot);
+    margin-bottom:6px;
+  }
+  .duration{
+    font-size:11.5px;
+    color:#9a9384;
+    margin-left:8px;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .card h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:21px;
+    margin:2px 0 10px;
+  }
+  .card p.desc{
+    font-size:14px;
+    color:#5c584c;
+    line-height:1.6;
+    margin:0 0 14px;
+    max-width:600px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-size:12px;
+    padding:5px 12px;
+    border-radius:999px;
+    background:rgba(0,0,0,0.04);
+    color:#4a4638;
+    border:1px solid rgba(0,0,0,0.06);
+  }
+  .phase.p1 .tag{background:rgba(201,162,74,0.12);color:#8a6a1f;border-color:rgba(201,162,74,0.25);}
+  .phase.p2 .tag{background:rgba(79,138,109,0.12);color:#2f5f47;border-color:rgba(79,138,109,0.25);}
+  .phase.p3 .tag{background:rgba(74,111,165,0.12);color:#2f4e7d;border-color:rgba(74,111,165,0.25);}
+
+  .note{
+    margin-top:10px;
+    font-size:12.5px;
+    color:#8a8474;
+    font-style:italic;
+  }
+
+  .closer{
+    margin-top:44px;
+    text-align:center;
+    font-size:13px;
+    color:#8a8474;
+    padding-top:24px;
+    border-top:1px solid #e6e0cf;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Rest of the Summer</h1>
+  <div class="sub">July 28 through September 10, about 6 weeks total</div>
+  <div class="split">3 stretches, split around 23 days of vacation (Aug 5&ndash;28)</div>
+
+  <div class="track">
+
+    <div class="phase p1">
+      <div class="card">
+        <div class="dates">Jul 28 &ndash; Aug 4<span class="duration">about 1 week</span></div>
+        <h2>Java OOP Project</h2>
+        <p class="desc">A short, self-contained build before you leave. Board game engine, starting with Tic-Tac-Toe and extending if it's going well. Forces real use of inheritance, interfaces, and encapsulation.</p>
+        <div class="tags">
+          <span class="tag">Fundamentals &rarr; OOP &rarr; Project-Based</span>
+          <span class="tag">Hardcoded by you, light assist</span>
+          <span class="tag">Clean finish before travel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase p2">
+      <div class="card">
+        <div class="dates">Aug 5 &ndash; Aug 28<span class="duration">23 days, vacation</span></div>
+        <h2>Coding Brushups</h2>
+        <p class="desc">Nothing project-related. Light, low-pressure upkeep: a few LeetCode-style problems, rereading a concept you're shaky on, that kind of thing. The point is to stay warm, not to produce anything.</p>
+        <div class="tags">
+          <span class="tag">No deliverables</span>
+          <span class="tag">No daily quota</span>
+          <span class="tag">Protects the vacation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase p3">
+      <div class="card">
+        <div class="dates">Aug 29 &ndash; Sep 10<span class="duration">about 13 days</span></div>
+        <h2>CV Impact Project, MVP Sprint</h2>
+        <p class="desc">Your one real stretch of dedicated build time. Goal is a genuinely working MVP, not a finished polished product. Direction (crowd safety, road safety, PPE detection, accessibility mapping) still to be locked in.</p>
+        <div class="tags">
+          <span class="tag">Passion + real world impact</span>
+          <span class="tag">MVP, not a finish line</span>
+          <span class="tag">Can run past Sep 10</span>
+        </div>
+        <div class="note">Direction decision matters more the closer this date gets.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="closer">13 focused days is tight for something WC-app-sized with real CV work. Treat Sep 10 as a checkpoint, not a deadline.</div>
+
+</div>
+</body>
+</html>
