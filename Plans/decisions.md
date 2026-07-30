@@ -21,3 +21,13 @@ notes, mockups, asset planning) layered on top, not alternate source roots.
 No 3D models needed (2D game). Start with free/CC0 tower-defense sprite packs
 (e.g. Kenney.nl) as placeholders so art never blocks a programming milestone.
 Swap in nicer art during the polish pass (milestone 4).
+
+## 2026-07-29 — Backend ownership split
+Backend stays ~90-95% hand-coded by Ellison, on purpose, to build the learning
+habit — Claude assists only when genuinely stuck. Claude Code is used mainly for
+frontend design work, not backend logic.
+
+## 2026-07-29 — Claude Code attribution config
+Added .claude/settings.json (attribution.commit / attribution.pr set to "") at the
+repo root, same pattern used on RetainIQ, so Claude Code doesn't appear as a
+contributor in git history / GitHub's contributor graph. Applies repo-wide.
